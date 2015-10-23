@@ -5,6 +5,7 @@ use Validator;
 use Redirect;
 use Session;
 use Request;
+use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller {
 
@@ -39,13 +40,13 @@ class ProductController extends Controller {
 		return view('home');
 	}
 	
-	public function addProduct()
+	public function addProduct(ProductRequest $request)
 	{
 		$Products = Products::create(Request::all());
 		return $Products;
     }
 	
-	public function editProduct()
+	public function editProduct(ProductRequest $request)
 	{
 		$Products              = Products::find(Request::input('id'));
 		$Products->name        = Request::input('name');

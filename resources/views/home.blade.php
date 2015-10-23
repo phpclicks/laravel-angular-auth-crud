@@ -71,17 +71,24 @@
 <div id="example-popup" style="display: none;">
 		   <div class="popup-content">
            <h2 class="popup-title">Add Product</h2>
-  <form  method="post">
+           <div id="messages" class="has-error alert alert-danger" ng-show="message"><% message %></div>
+            <div id="messages" class="has-error alert alert-success" ng-show="successmessage"><% successmessage %></div>
+  <form  name="productForm" novalidate>
   <input type="hidden" value="{{ csrf_token() }}" name="_token">
+
   <div class="form-group">
-   <span class="help-block" ng-show="errorName"></span> 
-    <input type="text" name="name" ng-model="name"  class="form-control" id="exampleInputEmail1" placeholder="Name">
+    <input type="text" name="name" ng-model="name"  class="form-control"  placeholder="Name" required>
+     <span class="help-block" ng-show="error_name"><% error_name %></span> 
   </div>
+ 
+
   <div class="form-group">
-     <input type="text"  name="price" ng-model="price"  class="form-control" id="exampleInputEmail1" placeholder="Price">
+     <input type="text"  name="price" ng-model="price"  class="form-control"  placeholder="Price">
+     <span class="help-block" ng-show="error_name"><% error_price %></span> 
   </div>
     <div class="form-group">
-     <input type="text" name="quantity" ng-model="quantity"   class="form-control" id="exampleInputEmail1" placeholder="Quantity">
+     <input type="text" name="quantity" ng-model="quantity"   class="form-control"  placeholder="Quantity">
+     <span class="help-block" ng-show="error_name"><% error_quantity %></span> 
   </div>
 
 
@@ -96,7 +103,7 @@
     </label>
   </div>
   
-  <button type="button" ng-click="addProduct()" class="btn btn-default">Submit</button>
+  <button type="button" ng-click="addProduct(productForm.$valid)" class="btn btn-default">Submit</button>
 </form>
         </div>
 
@@ -107,6 +114,8 @@
     <div id="example-popup2" style="display: none;">
 		   <div class="popup-content">
            <h2 class="popup-title">Edit Product</h2>
+                      <div id="messages" class="has-error alert alert-danger" ng-show="message"><% message %></div>
+            <div id="messages" class="has-error alert alert-success" ng-show="successmessage"><% successmessage %></div>
   <form  method="post">
   <input type="hidden" value="{{ csrf_token() }}" name="_token">
   <input type="hidden" name="id" ng-model="id">
